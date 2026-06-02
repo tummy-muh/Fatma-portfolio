@@ -1,6 +1,6 @@
 // ─── Render backend URL ───────────────────────────────────────────────────────
 // This is your live Render service URL. Update if it ever changes.
-const API_BASE = "https://fatma-portfolio-api.onrender.com";
+const API_BASE = "https://fatma-portfolio.onrender.com";
 
 // ===== Neuron animated background =====
 (function(){
