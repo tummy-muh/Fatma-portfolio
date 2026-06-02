@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: fatma-portfolio-api
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: RESEND_API_KEY
+        sync: false          # Set manually in Render dashboard — never commit your key
+      - key: MAIL_TO
+        value: fatma.muhsin2023@gmail.com
+      - key: MAIL_FROM
+        value: "onboarding@resend.dev"
+      - key: ALLOWED_ORIGINS
+        value: "https://fatma-portfolio-ten.vercel.app"

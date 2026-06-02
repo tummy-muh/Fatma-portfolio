@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Fatma Dar-wesh Muhsin — Data Science Portfolio</title>
+<meta name="description" content="Portfolio of Fatma Dar-wesh Muhsin — Data Science student, statistician and web developer based in Dar es Salaam, Tanzania."/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --berry:#7C2D5C; --berry-deep:#4E1A3B; --rose:#E8B4C8; --rose-soft:#FCE7EF;
+  --gold:#C9933A; --gold-lt:#F0D5A0; --ink:#1B0D17; --paper:#FFF8FB; --muted:#6B5560;
+  --surface:#fff; --border:rgba(124,45,92,.1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'DM Sans',system-ui,sans-serif;color:var(--ink);background:var(--paper);overflow-x:hidden;font-size:1rem;line-height:1.7}
+h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;letter-spacing:-.01em;line-height:1.15}
+
+/* Neuron canvas */
+#neuron-bg{position:fixed;inset:0;width:100%;height:100%;z-index:-1;opacity:.45;pointer-events:none}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:
+  radial-gradient(1200px 600px at 10% -10%,#FCE7EF 0%,transparent 60%),
+  radial-gradient(900px 500px at 110% 10%,#F3D9E3 0%,transparent 55%),
+  linear-gradient(180deg,#FFF8FB 0%,#FFF1F6 100%)}
+
+/* Nav */
+.navbar{backdrop-filter:saturate(160%) blur(16px);background:rgba(255,248,251,.88)!important;border-bottom:1px solid var(--border);padding:.9rem 0;transition:box-shadow .3s}
+.navbar.scrolled{box-shadow:0 4px 32px -8px rgba(124,45,92,.14)}
+.navbar-brand{font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--berry)!important;font-size:1.5rem;letter-spacing:-.02em;display:flex;align-items:center;gap:.45rem}
+.nav-link{color:var(--ink)!important;font-weight:500;text-transform:uppercase;font-size:.78rem;letter-spacing:.1em;margin:0 .2rem;position:relative;padding:.6rem 1rem!important;transition:color .2s}
+.nav-link.active,.nav-link:hover{color:var(--berry)!important}
+.nav-link.active::after,.nav-link:hover::after{content:"";position:absolute;left:1rem;right:1rem;bottom:.35rem;height:1.5px;background:linear-gradient(90deg,var(--berry),var(--gold));border-radius:2px}
+.btn-talk{border:1.5px solid var(--berry);color:var(--berry);background:transparent;border-radius:999px;padding:.5rem 1.4rem;font-size:.82rem;font-weight:600;letter-spacing:.04em;transition:all .25s}
+.btn-talk:hover{background:var(--berry);color:#fff;transform:translateY(-1px);box-shadow:0 10px 24px -10px var(--berry)}
+
+/* Hero */
+.hero{min-height:92vh;display:flex;align-items:center;padding:7rem 0 4rem;position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:.5rem;background:rgba(124,45,92,.07);color:var(--berry);padding:.4rem 1.1rem;border-radius:999px;font-size:.76rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.5rem;border:1px solid rgba(124,45,92,.12)}
+.eyebrow::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--berry);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.hero h1{font-size:clamp(2.6rem,5.5vw,4.4rem);line-height:1.05;margin:0 0 1.4rem;font-weight:600}
+.hero h1 .accent{background:linear-gradient(125deg,var(--berry),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p.lead{font-size:1.08rem;color:var(--muted);max-width:540px;margin-bottom:2.2rem;font-weight:400}
+.btn-primary-c{background:linear-gradient(135deg,var(--berry) 0%,var(--berry-deep) 100%);color:#fff;border:none;border-radius:999px;padding:.9rem 2rem;font-weight:600;font-size:.95rem;box-shadow:0 14px 30px -12px var(--berry);transition:transform .25s,box-shadow .25s;text-decoration:none;display:inline-block}
+.btn-primary-c:hover{transform:translateY(-2px);box-shadow:0 20px 40px -10px var(--berry);color:#fff}
+.btn-ghost-c{border:1.5px solid rgba(124,45,92,.22);color:var(--berry);border-radius:999px;padding:.9rem 1.8rem;font-weight:600;font-size:.95rem;background:#fff;margin-left:.7rem;transition:all .25s;text-decoration:none;display:inline-block}
+.btn-ghost-c:hover{border-color:var(--berry);background:var(--rose-soft)}
+.social-pill{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;background:#fff;color:var(--berry);border:1px solid rgba(124,45,92,.15);margin-right:.5rem;transition:all .25s;text-decoration:none;font-size:1rem}
+.social-pill:hover{background:var(--berry);color:#fff;transform:translateY(-3px) rotate(-5deg);box-shadow:0 10px 22px -8px var(--berry)}
+
+/* Hero image */
+.hero-img-wrap{position:relative;display:flex;justify-content:center;align-items:center;perspective:1200px}
+.hero-img-wrap .ring{position:absolute;inset:-30px;border-radius:50%;background:conic-gradient(from 0deg,var(--berry),var(--gold),var(--rose),var(--berry));filter:blur(2px);animation:spin 12s linear infinite;opacity:.5}
+.hero-img-wrap .ring::after{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--paper)}
+.hero-img{position:relative;width:min(360px,78vw);aspect-ratio:1/1;border-radius:50%;object-fit:cover;box-shadow:0 30px 60px -20px rgba(78,26,59,.45);animation:float 6s ease-in-out infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+.blob{position:absolute;border-radius:50%;filter:blur(40px);opacity:.45;animation:blob 9s ease-in-out infinite}
+.blob.b1{width:140px;height:140px;background:var(--rose);top:-10px;left:-20px}
+.blob.b2{width:180px;height:180px;background:var(--gold-lt);bottom:-20px;right:-30px;animation-delay:-3s}
+@keyframes blob{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(20px,-20px) scale(1.1)}}
+
+/* Sections */
+section{padding:6rem 0;position:relative}
+.section-tag{display:inline-block;color:var(--gold);font-weight:700;letter-spacing:.2em;text-transform:uppercase;font-size:.74rem;margin-bottom:.8rem}
+.section-heading{font-size:clamp(2rem,3.5vw,2.8rem);margin:0 0 1rem;font-weight:600}
+.section-sub{color:var(--muted);max-width:620px;margin:0 auto 3rem;font-size:1rem}
+.grad{background:linear-gradient(120deg,var(--berry),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* Cards */
+.card-c{background:#fff;border:1px solid var(--border);border-radius:22px;padding:2rem 2.2rem;height:100%;transition:all .35s;box-shadow:0 4px 24px -10px rgba(124,45,92,.12)}
+.card-c:hover{transform:translateY(-6px);box-shadow:0 24px 50px -20px rgba(124,45,92,.32);border-color:var(--rose)}
+.chip{display:inline-block;background:var(--rose-soft);color:var(--berry);padding:.28rem .78rem;border-radius:999px;font-size:.73rem;font-weight:600;margin:.15rem}
+
+/* Skills */
+.skill{margin-bottom:1.6rem}
+.skill-head{display:flex;justify-content:space-between;font-weight:600;font-size:.93rem;margin-bottom:.55rem}
+.skill-bar{height:9px;background:var(--rose-soft);border-radius:999px;overflow:hidden}
+.skill-fill{height:100%;background:linear-gradient(90deg,var(--berry),var(--gold));border-radius:999px;width:0;transition:width 1.4s cubic-bezier(.22,1,.36,1)}
+
+/* Projects */
+.proj{border-radius:22px;overflow:hidden;background:#fff;box-shadow:0 8px 30px -15px rgba(124,45,92,.22);transition:all .4s;height:100%;display:flex;flex-direction:column}
+.proj:hover{transform:translateY(-10px);box-shadow:0 30px 60px -20px rgba(124,45,92,.4)}
+.proj-img{aspect-ratio:4/3;overflow:hidden;background:var(--rose-soft)}
+.proj-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s}
+.proj:hover .proj-img img{transform:scale(1.08)}
+.proj-body{padding:1.8rem;flex:1;display:flex;flex-direction:column}
+.proj-tag{color:var(--gold);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.7rem}
+.proj-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;margin:.4rem 0 .6rem;font-weight:600}
+.proj p{color:var(--muted);font-size:.92rem;margin:0;flex:1}
+
+/* ===== EXPERIENCE TABS ===== */
+.exp-section{background:linear-gradient(180deg,transparent,rgba(252,231,239,.45),transparent)}
+.exp-tabs .nav-pills{gap:.5rem;margin-bottom:2rem!important}
+.exp-tabs .nav-link{border:1.5px solid var(--border);border-radius:999px;color:var(--ink);background:#fff;padding:.55rem 1.6rem;font-size:.84rem;font-weight:600;letter-spacing:.04em;transition:all .25s}
+.exp-tabs .nav-link.active,.exp-tabs .nav-link:hover{background:var(--berry);color:#fff;border-color:var(--berry);box-shadow:0 8px 20px -8px var(--berry)}
+.exp-tab-content{background:#fff;border-radius:22px;border:1px solid var(--border);box-shadow:0 8px 30px -15px rgba(124,45,92,.12);padding:2.5rem 2rem}
+
+/* Timeline */
+.timeline{position:relative;padding-left:2.5rem}
+.timeline::before{content:"";position:absolute;left:.8rem;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--berry),var(--gold));border-radius:2px;opacity:.35}
+.timeline-item{position:relative;margin-bottom:2.2rem;padding-bottom:2.2rem;border-bottom:1px solid var(--border)}
+.timeline-item:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.timeline-item::before{content:"";position:absolute;left:-1.75rem;top:.3rem;width:12px;height:12px;border-radius:50%;background:var(--berry);box-shadow:0 0 0 3px rgba(124,45,92,.18)}
+.timeline-year{display:inline-block;background:var(--rose-soft);color:var(--berry);padding:.2rem .85rem;border-radius:999px;font-size:.75rem;font-weight:700;letter-spacing:.06em;margin-bottom:.5rem}
+.timeline-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;margin-bottom:.25rem}
+.timeline-place{color:var(--gold);font-size:.85rem;font-weight:600;margin-bottom:.4rem}
+.timeline-desc{color:var(--muted);font-size:.92rem;line-height:1.65}
+
+/* Skill cards in cert tab */
+.skill-card{background:var(--rose-soft);border-radius:18px;padding:1.8rem;height:100%;text-align:center;transition:all .3s;border:1px solid transparent}
+.skill-card:hover{background:#fff;border-color:var(--rose);transform:translateY(-5px);box-shadow:0 20px 40px -15px rgba(124,45,92,.25)}
+.skill-card .icon{font-size:2rem;color:var(--berry);margin-bottom:1rem}
+.skill-card h3{font-size:1.1rem;font-weight:700;margin-bottom:.6rem}
+.skill-card p{color:var(--muted);font-size:.88rem;margin:0}
+
+/* Contact */
+.contact-card{display:flex;align-items:center;gap:1rem;background:#fff;border:1px solid var(--border);border-radius:16px;padding:1.1rem 1.4rem;transition:all .3s}
+.contact-card:hover{border-color:var(--rose);box-shadow:0 8px 24px -10px rgba(124,45,92,.18);transform:translateX(4px)}
+.contact-icon{width:44px;height:44px;border-radius:12px;background:var(--rose-soft);color:var(--berry);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.contact-label{font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.1rem}
+.contact-value{margin:0;font-weight:500;font-size:.95rem}
+.contact-value a{color:var(--ink);text-decoration:none;transition:color .2s}
+.contact-value a:hover{color:var(--berry)}
+.social-btn{display:inline-flex;align-items:center;gap:.45rem;background:#fff;border:1.5px solid var(--border);border-radius:999px;padding:.55rem 1.2rem;font-size:.84rem;font-weight:600;color:var(--ink);text-decoration:none;margin-right:.5rem;margin-bottom:.5rem;transition:all .25s}
+.social-btn:hover{background:var(--berry);color:#fff;border-color:var(--berry);transform:translateY(-2px);box-shadow:0 10px 22px -8px var(--berry)}
+.form-control{border:1.5px solid rgba(124,45,92,.14);border-radius:14px;padding:.85rem 1.1rem;background:#fff;font-size:.93rem;font-family:'DM Sans',sans-serif}
+.form-control:focus{border-color:var(--berry);box-shadow:0 0 0 4px rgba(124,45,92,.08);outline:none}
+.form-label{font-size:.82rem;font-weight:600;letter-spacing:.04em;color:var(--ink);margin-bottom:.4rem}
+.btn-neon{background:linear-gradient(135deg,var(--berry) 0%,var(--berry-deep) 100%);color:#fff;border:none;border-radius:999px;padding:.9rem 2rem;font-weight:700;font-size:.93rem;box-shadow:0 12px 28px -10px var(--berry);transition:all .28s}
+.btn-neon:hover{transform:translateY(-2px);box-shadow:0 20px 40px -10px var(--berry);color:#fff}
+.form-status{font-size:.88rem;font-weight:500}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:all .85s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* Footer */
+footer{padding:1.8rem 0;text-align:center;color:var(--muted);font-size:.86rem;border-top:1px solid var(--border);background:rgba(255,248,251,.8)}
+footer .grad{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600}
+
+@media(max-width:767px){
+  .hero{padding:6rem 0 3rem}
+  .hero h1{font-size:2.2rem}
+  .exp-tab-content{padding:1.5rem 1rem}
+}
+</style>
+</head>
+<body>
+<canvas id="neuron-bg"></canvas>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#section_1"><span class="brand-dot"></span>Fatma Muhsin</a>
+    <button class="navbar-toggler border-0" data-bs-toggle="collapse" data-bs-target="#nav"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link click-scroll active" href="#section_1">Home</a></li>
+        <li class="nav-item"><a class="nav-link click-scroll" href="#about-section">About</a></li>
+        <li class="nav-item"><a class="nav-link click-scroll" href="#section_3">Experience</a></li>
+        <li class="nav-item"><a class="nav-link click-scroll" href="#skills-section">Skills</a></li>
+        <li class="nav-item"><a class="nav-link click-scroll" href="#section_4">Projects</a></li>
+        <li class="nav-item"><a class="nav-link click-scroll" href="#contact">Contact</a></li>
+        <li class="nav-item ms-lg-3"><a href="#contact" class="btn btn-talk click-scroll">Let's Talk</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header id="section_1" class="hero">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7 reveal">
+        <span class="eyebrow">Data Science Student · Statistician · Web Developer</span>
+        <h1>Hi, I'm <span class="accent">Fatma Dar-wesh Muhsin</span><br/>Turning data into <span class="accent">decisions.</span></h1>
+        <p class="lead">I am a student at the Eastern African Statistical Training Centre (EASTC), passionate about turning data into clear, actionable insights through Machine Learning, Statistics and modern Web Development.</p>
+        <div class="mb-4">
+          <a href="#section_4" class="btn btn-primary-c click-scroll">View Projects</a>
+          <a href="#contact" class="btn btn-ghost-c click-scroll">Get in Touch</a>
+        </div>
+        <div>
+          <a href="https://linkedin.com" target="_blank" class="social-pill" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="https://github.com" target="_blank" class="social-pill" aria-label="GitHub"><i class="bi bi-github"></i></a>
+          <a href="https://wa.me/255718322578" target="_blank" class="social-pill" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+          <a href="mailto:fatma.muhsin2023@gmail.com" class="social-pill" aria-label="Email"><i class="bi bi-envelope"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-5 reveal">
+        <div class="hero-img-wrap">
+          <span class="blob b1"></span><span class="blob b2"></span>
+          <div class="ring"></div>
+          <img src="assets/hero.jpg" alt="Fatma Dar-wesh Muhsin" class="hero-img">
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about-section" style="padding:5rem 0;background:linear-gradient(180deg,transparent,rgba(252,231,239,.3),transparent)">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5 reveal text-center">
+        <div style="position:relative;display:inline-block">
+          <div style="width:300px;height:300px;border-radius:28px;background:linear-gradient(135deg,#FFF8FB 0%,#FCE7EF 100%);display:inline-flex;align-items:center;justify-content:center;box-shadow:0 30px 60px -15px rgba(124,45,92,.3);border:2px solid rgba(124,45,92,.1)">
+            <svg viewBox="0 0 260 260" width="240" height="240" xmlns="http://www.w3.org/2000/svg">
+              <!-- Background glow circles -->
+              <circle cx="130" cy="130" r="110" fill="rgba(124,45,92,.04)"/>
+              <circle cx="130" cy="130" r="80" fill="rgba(124,45,92,.05)"/>
+              <!-- Monitor / laptop screen -->
+              <rect x="45" y="65" width="170" height="108" rx="10" fill="#fff" stroke="#E8B4C8" stroke-width="2"/>
+              <rect x="45" y="65" width="170" height="18" rx="10" fill="#7C2D5C"/>
+              <!-- window dots -->
+              <circle cx="58" cy="74" r="3.5" fill="#FCE7EF"/>
+              <circle cx="70" cy="74" r="3.5" fill="#F0D5A0"/>
+              <circle cx="82" cy="74" r="3.5" fill="#a8edaf"/>
+              <!-- chart bars on screen -->
+              <rect x="62" y="130" width="14" height="30" rx="3" fill="rgba(124,45,92,.25)"/>
+              <rect x="82" y="118" width="14" height="42" rx="3" fill="rgba(124,45,92,.45)"/>
+              <rect x="102" y="105" width="14" height="55" rx="3" fill="#7C2D5C"/>
+              <rect x="122" y="112" width="14" height="48" rx="3" fill="rgba(201,147,58,.7)"/>
+              <rect x="142" y="100" width="14" height="60" rx="3" fill="rgba(124,45,92,.6)"/>
+              <rect x="162" y="122" width="14" height="38" rx="3" fill="rgba(201,147,58,.5)"/>
+              <!-- trend line over bars -->
+              <polyline points="69,135 89,122 109,108 129,115 149,103 169,125" fill="none" stroke="#C9933A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="3 2"/>
+              <!-- base line -->
+              <line x1="58" y1="162" x2="202" y2="162" stroke="#E8B4C8" stroke-width="1.5"/>
+              <!-- Laptop base/stand -->
+              <rect x="85" y="173" width="90" height="6" rx="3" fill="#E8B4C8"/>
+              <rect x="100" y="179" width="60" height="5" rx="2.5" fill="#dda0bb"/>
+              <!-- Floating data chips -->
+              <rect x="10" y="90" width="58" height="22" rx="11" fill="#7C2D5C" opacity=".9"/>
+              <text x="39" y="105" text-anchor="middle" font-size="9" fill="#fff" font-family="Arial,sans-serif" font-weight="700">Python</text>
+              <rect x="192" y="85" width="58" height="22" rx="11" fill="#C9933A" opacity=".9"/>
+              <text x="221" y="100" text-anchor="middle" font-size="9" fill="#fff" font-family="Arial,sans-serif" font-weight="700">scikit-learn</text>
+              <rect x="8" y="148" width="50" height="22" rx="11" fill="rgba(124,45,92,.75)"/>
+              <text x="33" y="163" text-anchor="middle" font-size="8.5" fill="#fff" font-family="Arial,sans-serif" font-weight="700">SQL</text>
+              <rect x="202" y="143" width="50" height="22" rx="11" fill="rgba(201,147,58,.85)"/>
+              <text x="227" y="158" text-anchor="middle" font-size="8.5" fill="#fff" font-family="Arial,sans-serif" font-weight="700">R</text>
+              <!-- Scatter dots (AI/ML themed) -->
+              <circle cx="75" cy="50" r="5" fill="rgba(124,45,92,.3)"/>
+              <circle cx="130" cy="38" r="7" fill="rgba(201,147,58,.35)"/>
+              <circle cx="185" cy="52" r="4.5" fill="rgba(124,45,92,.25)"/>
+              <!-- Neural net nodes at bottom -->
+              <circle cx="90" cy="215" r="9" fill="#fff" stroke="#7C2D5C" stroke-width="2"/>
+              <circle cx="130" cy="215" r="9" fill="#fff" stroke="#C9933A" stroke-width="2"/>
+              <circle cx="170" cy="215" r="9" fill="#fff" stroke="#7C2D5C" stroke-width="2"/>
+              <circle cx="110" cy="235" r="7" fill="#7C2D5C" opacity=".7"/>
+              <circle cx="150" cy="235" r="7" fill="#C9933A" opacity=".7"/>
+              <line x1="90" y1="215" x2="110" y2="235" stroke="#7C2D5C" stroke-width="1.2" opacity=".5"/>
+              <line x1="130" y1="215" x2="110" y2="235" stroke="#7C2D5C" stroke-width="1.2" opacity=".5"/>
+              <line x1="130" y1="215" x2="150" y2="235" stroke="#C9933A" stroke-width="1.2" opacity=".5"/>
+              <line x1="170" y1="215" x2="150" y2="235" stroke="#C9933A" stroke-width="1.2" opacity=".5"/>
+            </svg>
+          </div>
+          <div style="position:absolute;bottom:-16px;right:-16px;background:linear-gradient(135deg,var(--berry),var(--gold));color:#fff;border-radius:16px;padding:.7rem 1.2rem;font-size:.8rem;font-weight:700;letter-spacing:.04em;box-shadow:0 10px 24px -8px var(--berry)">
+            <i class="bi bi-mortarboard-fill me-1"></i> EASTC · BSc Data Science
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7 reveal">
+        <span class="section-tag">About Me</span>
+        <h2 class="section-heading">Passionate about <span class="grad">data-driven</span> solutions</h2>
+        <p style="color:var(--muted);font-size:1rem;line-height:1.8;margin-bottom:1.4rem">
+          I'm <strong>Fatma Dar-wesh Muhsin</strong>, a Data Science &amp; Statistics student at EASTC in Dar es Salaam. I combine rigorous statistical thinking with hands-on programming to turn messy, real-world data into clear, actionable insights.
+        </p>
+        <p style="color:var(--muted);font-size:1rem;line-height:1.8;margin-bottom:1.8rem">
+          My work spans machine learning pipelines, survey data engineering, time-series forecasting, and full-cycle web development. I'm particularly passionate about applying data science to East African development challenges — from health analytics to agricultural forecasting.
+        </p>
+        <div class="row g-3">
+          <div class="col-sm-6">
+            <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:1rem 1.2rem;display:flex;align-items:center;gap:.8rem">
+              <i class="bi bi-geo-alt-fill" style="color:var(--berry);font-size:1.3rem"></i>
+              <div><div style="font-size:.72rem;font-weight:700;color:var(--muted);letter-spacing:.1em;text-transform:uppercase">Based in</div><div style="font-weight:600;font-size:.93rem">Dar es Salaam, Tanzania</div></div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:1rem 1.2rem;display:flex;align-items:center;gap:.8rem">
+              <i class="bi bi-calendar2-check-fill" style="color:var(--berry);font-size:1.3rem"></i>
+              <div><div style="font-size:.72rem;font-weight:700;color:var(--muted);letter-spacing:.1em;text-transform:uppercase">Available for</div><div style="font-weight:600;font-size:.93rem">Internships &amp; Freelance</div></div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:1rem 1.2rem;display:flex;align-items:center;gap:.8rem">
+              <i class="bi bi-translate" style="color:var(--berry);font-size:1.3rem"></i>
+              <div><div style="font-size:.72rem;font-weight:700;color:var(--muted);letter-spacing:.1em;text-transform:uppercase">Languages</div><div style="font-weight:600;font-size:.93rem">Swahili · English · Arabic</div></div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:1rem 1.2rem;display:flex;align-items:center;gap:.8rem">
+              <i class="bi bi-heart-fill" style="color:var(--berry);font-size:1.3rem"></i>
+              <div><div style="font-size:.72rem;font-weight:700;color:var(--muted);letter-spacing:.1em;text-transform:uppercase">Interests</div><div style="font-weight:600;font-size:.93rem">ML · Dev Research · Stats</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE / QUALIFICATIONS / CERTIFICATIONS -->
+<section class="exp-section" id="section_3">
+  <div class="container">
+    <div class="text-center reveal mb-5">
+      <span class="section-tag">Background</span>
+      <h2 class="section-heading">Experience &amp; Qualifications</h2>
+      <p class="section-sub">A record of professional growth, academic achievement, and domain expertise built across data science, development, and research.</p>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-10 col-12 mx-auto reveal">
+        <div class="exp-tabs">
+          <ul class="nav nav-pills justify-content-center" id="expTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="tab-exp" data-bs-toggle="pill" data-bs-target="#pane-exp" type="button">Work Experience</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="tab-qual" data-bs-toggle="pill" data-bs-target="#pane-qual" type="button">Qualifications</button>
+            </li>
+
+          </ul>
+
+          <div class="tab-content exp-tab-content" id="expTabContent">
+
+            <!-- Work Experience -->
+            <div class="tab-pane fade show active" id="pane-exp" role="tabpanel">
+              <div class="row">
+                <div class="col-lg-9 mx-auto">
+                  <div class="timeline">
+                    <div class="timeline-item">
+                      <span class="timeline-year">2023 – Present</span>
+                      <div class="timeline-title">Data Collection &amp; Analysis</div>
+                      <div class="timeline-place">Freelance / Academic Projects</div>
+                      <div class="timeline-desc">Engineered and deployed end-to-end survey pipelines using KoboToolbox and Google Forms, serving research teams across East Africa. Delivered clean, reproducible datasets and analytical reports using Python, R, and Excel — reducing time-to-insight by automating data cleaning workflows.</div>
+                    </div>
+                    <div class="timeline-item">
+                      <span class="timeline-year">2022 – 2023</span>
+                      <div class="timeline-title">Web Design &amp; Development</div>
+                      <div class="timeline-place">Personal &amp; Academic Projects</div>
+                      <div class="timeline-desc">Designed, built, and deployed fully responsive websites from concept to production. Leveraged HTML5, CSS3, Bootstrap, and JavaScript to craft performant, accessible user interfaces — including this portfolio — while maintaining clean, maintainable codebases.</div>
+                    </div>
+                    <div class="timeline-item">
+                      <span class="timeline-year">2021 – 2022</span>
+                      <div class="timeline-title">Database Design &amp; Management</div>
+                      <div class="timeline-place">Academic Projects</div>
+                      <div class="timeline-desc">Architected normalised relational database schemas and authored optimised SQL queries for data retrieval, transformation, and reporting. Applied data modelling best practices to support analytical use cases and maintain referential integrity across complex datasets.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Qualifications -->
+            <div class="tab-pane fade" id="pane-qual" role="tabpanel">
+              <div class="row">
+                <div class="col-lg-9 mx-auto">
+                  <div class="timeline">
+                    <div class="timeline-item">
+                      <span class="timeline-year">2022 – 2025</span>
+                      <div class="timeline-title">BSc Data Science &amp; Statistics</div>
+                      <div class="timeline-place">Eastern African Statistical Training Centre (EASTC)</div>
+                      <div class="timeline-desc">Coursework spanning probability theory, programming, machine learning, database systems, and time-series analysis — building a rigorous foundation for data-driven problem solving.</div>
+                    </div>
+                    <div class="timeline-item">
+                      <span class="timeline-year">2024 – 2025</span>
+                      <div class="timeline-title">A-Level — PCM</div>
+                      <div class="timeline-place">Secondary School</div>
+                      <div class="timeline-desc">Physics, Chemistry, Mathematics — graduated with distinction.</div>
+                    </div>
+                    
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills-section">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="section-tag">Expertise</span>
+      <h2 class="section-heading">Technical Proficiency</h2>
+      <p class="section-sub">A curated blend of programming, statistical, and data-collection tools refined through real-world projects.</p>
+    </div>
+    <div class="row g-5">
+      <div class="col-lg-6 reveal" id="skills-left">
+        <div class="skill"><div class="skill-head"><span><i class="bi bi-filetype-py" style="color:var(--berry);margin-right:.4rem"></i>Python (Pandas, NumPy, Scikit-learn)</span><span>90%</span></div><div class="skill-bar"><div class="skill-fill" data-pct="90"></div></div></div>
+        <div class="skill"><div class="skill-head"><span><i class="bi bi-code-slash" style="color:var(--berry);margin-right:.4rem"></i>R (tidyverse, ggplot2, caret)</span><span>85%</span></div><div class="skill-bar"><div class="skill-fill" data-pct="85"></div></div></div>
+        <div class="skill"><div class="skill-head"><span><i class="bi bi-database-fill" style="color:var(--berry);margin-right:.4rem"></i>SQL &amp; Database Management</span><span>80%</span></div><div class="skill-bar"><div class="skill-fill" data-pct="80"></div></div></div>
+        <div class="skill"><div class="skill-head"><span><i class="bi bi-file-earmark-excel-fill" style="color:var(--berry);margin-right:.4rem"></i>Excel &amp; Power BI</span><span>88%</span></div><div class="skill-bar"><div class="skill-fill" data-pct="88"></div></div></div>
+        <div class="skill"><div class="skill-head"><span><i class="bi bi-funnel-fill" style="color:var(--berry);margin-right:.4rem"></i>Data Cleaning &amp; Feature Engineering</span><span>87%</span></div><div class="skill-bar"><div class="skill-fill" data-pct="87"></div></div></div>
+        <div class="skill"><div class="skill-head"><span><i class="bi bi-hdd-stack-fill" style="color:var(--berry);margin-right:.4rem"></i>Big Data Tools (Hadoop basics)</span><span>60%</span></div><div class="skill-bar"><div class="skill-fill" data-pct="60"></div></div></div>
+      </div>
+      <div class="col-lg-6 reveal">
+        <div class="skill"><div class="skill-head"><span><i class="bi bi-cpu-fill" style="color:var(--berry);margin-right:.4rem"></i>Machine Learning</span><span>78%</span></div><div class="skill-bar"><div class="skill-fill" data-pct="78"></div></div></div>
+        <div class="skill"><div class="skill-head"><span><i class="bi bi-graph-up-arrow" style="color:var(--berry);margin-right:.4rem"></i>Time Series Forecasting</span><span>75%</span></div><div class="skill-bar"><div class="skill-fill" data-pct="75"></div></div></div>
+        <div class="skill"><div class="skill-head"><span><i class="bi bi-ui-checks-grid" style="color:var(--berry);margin-right:.4rem"></i>KoboToolbox</span><span>92%</span></div><div class="skill-bar"><div class="skill-fill" data-pct="92"></div></div></div>
+        <div class="skill"><div class="skill-head"><span><i class="bi bi-globe2" style="color:var(--berry);margin-right:.4rem"></i>HTML / CSS / Bootstrap</span><span>90%</span></div><div class="skill-bar"><div class="skill-fill" data-pct="90"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="section_4" style="background:linear-gradient(180deg,transparent,rgba(252,231,239,.4),transparent)">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="section-tag">Portfolio</span>
+      <h2 class="section-heading">Selected Work</h2>
+      <p class="section-sub">Projects spanning survey analytics, predictive modelling, and time series forecasting — each built to answer real questions with rigorous methodology.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4 reveal">
+        <div class="proj">
+          <div class="proj-img"><img src="assets/project-survey.jpg" alt="Survey data analysis" loading="lazy"></div>
+          <div class="proj-body">
+            <div class="proj-tag">Data Analysis</div>
+            <div class="proj-title">Survey Data Analysis</div>
+            <p>Designed structured KoboToolbox surveys and analysed multi-variable responses with Python and R, producing executive-ready reports with actionable recommendations.</p>
+            <div class="mt-3"><span class="chip">KoboToolbox</span><span class="chip">Python</span><span class="chip">R</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 reveal">
+        <div class="proj">
+          <div class="proj-img"><img src="assets/project-ml.jpg" alt="Machine learning model" loading="lazy"></div>
+          <div class="proj-body">
+            <div class="proj-tag">Machine Learning</div>
+            <div class="proj-title">Predictive ML Pipeline</div>
+            <p>Designed, trained, and evaluated end-to-end classification and regression models on real-world datasets using scikit-learn, with thorough cross-validation and interpretability analysis.</p>
+            <div class="mt-3"><span class="chip">scikit-learn</span><span class="chip">Pandas</span><span class="chip">Python</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 reveal">
+        <div class="proj">
+          <div class="proj-img"><img src="assets/project-timeseries.jpg" alt="Time series forecasting" loading="lazy"></div>
+          <div class="proj-body">
+            <div class="proj-tag">Time Series</div>
+            <div class="proj-title">Time Series Forecasting</div>
+            <p>Applied ARIMA and Facebook Prophet models to multi-seasonal datasets, generating robust forecasts with confidence intervals and decomposition analysis.</p>
+            <div class="mt-3"><span class="chip">ARIMA</span><span class="chip">Prophet</span><span class="chip">R</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="text-center reveal">
+      <span class="section-tag">Contact</span>
+      <h2 class="section-heading">Let's build something <span class="grad">together</span></h2>
+      <p class="section-sub">Open to internships, freelance engagements, and research collaborations. I typically respond within 24 hours.</p>
+    </div>
+
+    <div class="reveal">
+      <div class="row g-4">
+        <div class="col-lg-5">
+          <div class="row g-3">
+            <div class="col-12">
+              <div class="contact-card">
+                <div class="contact-icon"><i class="bi bi-envelope-fill"></i></div>
+                <div>
+                  <div class="contact-label">Email</div>
+                  <p class="contact-value"><a href="mailto:fatma.muhsin2023@gmail.com">fatma.muhsin2023@gmail.com</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="contact-card">
+                <div class="contact-icon"><i class="bi bi-telephone-fill"></i></div>
+                <div>
+                  <div class="contact-label">Phone</div>
+                  <p class="contact-value"><a href="tel:+255718322578">+255 718 322 578</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="contact-card">
+                <div class="contact-icon"><i class="bi bi-whatsapp"></i></div>
+                <div>
+                  <div class="contact-label">WhatsApp</div>
+                  <p class="contact-value"><a href="https://wa.me/255718322578" target="_blank">+255 718 322 578</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="contact-card">
+                <div class="contact-icon"><i class="bi bi-geo-alt-fill"></i></div>
+                <div>
+                  <div class="contact-label">Location</div>
+                  <p class="contact-value">Dar es Salaam, Tanzania</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <a href="https://github.com" target="_blank" class="social-btn"><i class="bi bi-github"></i> GitHub</a>
+            <a href="https://linkedin.com" target="_blank" class="social-btn"><i class="bi bi-linkedin"></i> LinkedIn</a>
+            <a href="https://wa.me/255718322578" target="_blank" class="social-btn"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+            <a href="mailto:fatma.muhsin2023@gmail.com" class="social-btn"><i class="bi bi-envelope"></i> Email</a>
+          </div>
+        </div>
+
+        <div class="col-lg-7">
+          <form id="contactForm" novalidate>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Name</label>
+                <input name="name" class="form-control" placeholder="Your full name" required />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input name="email" type="email" class="form-control" placeholder="you@email.com" required />
+              </div>
+              <div class="col-12">
+                <label class="form-label">Subject</label>
+                <input name="subject" class="form-control" placeholder="What's this about?" />
+              </div>
+              <div class="col-12">
+                <label class="form-label">Message</label>
+                <textarea name="message" rows="5" class="form-control" placeholder="Tell me about your project or opportunity..." required></textarea>
+              </div>
+              <div class="col-12 d-flex align-items-center gap-3 flex-wrap">
+                <button type="submit" class="btn btn-neon"><i class="bi bi-send me-1"></i> Send Message</button>
+                <span id="formStatus" class="form-status"></span>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    Copyright &copy; 2025 Abdalla Kombo Bakar. All rights reserved.
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
